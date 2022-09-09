@@ -1,0 +1,239 @@
+/**
+ * All of the CSS for your admin-specific functionality should be
+ * included in this file.
+ */
+input,
+select,
+textarea {
+    display: block;
+    max-width: 100% !important;
+}
+
+input[type=checkbox],
+input[type=radio] {
+    border: 1px solid #8c8f94;
+    border-radius: 4px;
+    background: #fff;
+    color: #50575e;
+    clear: none;
+    cursor: pointer;
+    display: inline-block;
+    line-height: 0;
+    margin: -0.25rem 0.25rem 0 0;
+    outline: 0;
+    padding: 0 !important;
+    text-align: center;
+    vertical-align: middle !important;
+    min-width: 1rem;
+    -webkit-appearance: none;
+    box-shadow: inset 0 1px 2px rgb(0 0 0 / 10%);
+    transition: .05s border-color ease-in-out;
+}
+
+.fw-bold {
+    font-weight: bold;
+}
+
+.d-none {
+    display: none !important;
+}
+
+.font-1 {
+    font-size: 1rem !important;
+}
+
+.text-center {
+    text-align: center !important;
+}
+
+.fw-bold {
+    font-weight: 700 !important;
+}
+
+.label {
+    color: #363636;
+    display: block;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.5em;
+}
+
+.mw-50 {
+    margin: auto;
+    max-width: 50% !important;
+}
+
+.mw-70 {
+    margin: auto;
+    max-width: 70% !important;
+}
+
+.w-100 {
+    width: 100% !important;
+}
+
+.m-0 {
+    margin: 0 !important;
+}
+
+.p-0 {
+    padding: 0 !important;
+}
+
+.mt-2 {
+    margin-top: 0.5rem !important;
+}
+
+.mb-2 {
+    margin-bottom: 0.5rem !important;
+}
+
+.mt-3 {
+    margin-top: 1rem !important;
+}
+
+.mb-3 {
+    margin-bottom: 1rem !important;
+}
+
+.mb-5 {
+    margin-bottom: 3rem !important;
+}
+
+.mt-5 {
+    margin-top: 3rem !important;
+}
+
+.posts-api-wp-btn {
+    font-size: 16px;
+    display: block;
+    border: 1px solid;
+    border-color: #9c27b0;
+    cursor: pointer;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    padding-bottom: calc(0.5em - 1px);
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-top: calc(0.5em - 1px);
+    text-align: center;
+    white-space: nowrap;
+    background-color: #9c27b0;
+    border-radius: 5px;
+    color: #fff;
+}
+
+.posts-api-wp-btn-outline {
+    font-size: 16px;
+    display: block;
+    border: 1px solid;
+    border-color: #9c27b0;
+    cursor: pointer;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    padding-bottom: calc(0.5em - 1px);
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-top: calc(0.5em - 1px);
+    text-align: center;
+    white-space: nowrap;
+    background-color: #fff;
+    border-radius: 5px;
+    color: #9c27b0;
+}
+
+.table td,
+.table th {
+    border: 1px solid #dbdbdb;
+    border-width: 0 0 1px;
+    padding: 0.5em 0.75em;
+    vertical-align: top;
+}
+
+code {
+    background-color: whitesmoke;
+    color: #da1039;
+    font-size: 0.875em;
+    font-weight: normal;
+    padding: 0.25em 0.5em 0.25em;
+}
+
+pre {
+    -webkit-overflow-scrolling: touch;
+    background-color: whitesmoke;
+    color: #4a4a4a;
+    overflow-x: auto;
+    white-space: pre;
+    word-wrap: normal;
+    -webkit-font-smoothing: auto;
+    font-family: monospace;
+    font-size: 0.9375rem !important;
+    line-height: 1.6 !important;
+    margin-bottom: 1.6em !important;
+    max-width: 100% !important;
+    padding: 1.5em !important;
+}
+
+a.posts-api-wp-btn,
+a.posts-api-wp-btn-outline {
+    text-decoration: none !important;
+}
+
+.posts-api-wp-btn-outline:hover {
+    background-color: #9c27b0 !important;
+    color: #fff !important;
+}
+
+select.posts-api-wp-input[multiple] {
+    height: 120px;
+    resize: auto;
+    font-size: 1rem;
+}
+
+.posts-api-wp-input:focus {
+    border-color: #9c27b0 !important;
+    box-shadow: 0 0 0 1px #9c27b0 !important;
+}
+
+.posts-api-wp-input-append {
+    border-radius: 5px 0 0 5px !important;
+}
+
+.posts-api-wp-btn-append {
+    border-radius: 0 5px 5px 0 !important;
+}
+
+.posts-api-wp-alert {
+    border-radius: 4px;
+    padding: 1.25rem 2.5rem 1.25rem 1.5rem;
+    border-left: 5px solid;
+    border-top: 1px solid;
+    border-right: 1px solid;
+    border-bottom: 1px solid;
+}
+
+.posts-api-wp-alert.success {
+    background-color: #ebfffc;
+    color: #00947e;
+    border-color: #00d1b2;
+}
+
+.posts-api-wp-alert.info {
+    background-color: #eef6fc;
+    color: #1d72aa;
+    border-color: #3298dc;
+}
+
+.posts-api-wp-alert.danger {
+    color: #cc0f35;
+    border-color: #f14668;
+    background-color: #feecf0;
+}
+
+.posts-api-wp-section {
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 8px #ddd;
+}

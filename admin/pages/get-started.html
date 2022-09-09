@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <div class="wrap" id="posts-api-wp">
+            <section class="mt-3 posts-api-wp-section">
+                <h4 class="title is-5 mb-4">PLUGIN DESCRIPTION</h4>
+                <p class="font-1 mb-2">
+                    <b>WP Posts API</b> is a plugin that helps to make your WordPress posts available outside your WordPress site. This plugin acts like a regular <b>API</b> that can be used to share your wordpress posts to other websites.
+                </p>
+                <p class="font-1 mb-2">
+                    This means that if you have a static website that is not built with WordPress, you can use this plugin to make your WordPress posts available to that website. You can also use this plugin if you just want to share your wordpress posts to other websites.
+                </p>
+                <p class="posts-api-wp-alert danger font-1">
+                    All <b>API endpoints</b> are secured with an authorization key and this means that you have full control over how your WordPress posts are shared. 
+                </p>
+            </section>
+            <section class="mt-3 posts-api-wp-section">
+                <article class="m-0">
+                    <h4 class="title is-5 mb-4 mt-4">API PARAMETERS</h4>
+                    <p class="font-1 mb-2">In order to make your first request, you need to <b>configure the API parameters</b> from the plugin interface.</p>
+                    <h4 class="title is-6 mb-3 mt-3">TO BEGIN,</h4>
+                    <p class="font-1 mb-2">Head over to the configuration page and set up an authorization key.</p>
+                    <p class="font-1 mb-2">After you must have set up your <strong>Authorization key,</strong> modify the configuration options such as; the number of posts to retrieve, the categories to get posts from, then save the configuration options. These options serve as the API parameters.</p>
+                </article>
+            </section>
+            <section class="mt-3 posts-api-wp-section">
+                <article class="m-0">
+                    <h4 class="title is-5 mb-4 mt-4">API ENDPOINT</h4>
+                    <p class="font-1 mb-2">You've set up an <b>authorization key,</b> configured the <b>API parameters</b> and now you need access to the endpoint in order to make your first request.</p>
+                    <h4 class="title is-6 mb-3 mt-3">TO BEGIN,</h4>
+                    <p class="font-1 mb-2">Head over to the how to use page and copy your endpoint URL.</p>
+                    <p class="font-1 mb-2">You should see something like this;</p>
+                    <p class="font-1 mb-2"><code>http://domain.com/YOUR_WORDPRESS_FOLDER/wp-content/plugins/posts-api-wp/admin/api/get_posts.php</code></p>
+                    <p class="font-1 mb-2">Now you have to modify the endpoint URL to reflect your WordPress folder.</p>
+                    <h4 class="title is-6 mb-3 mt-3">FOR EXAMPLE,</h4>
+                    <p class="font-1 mb-2">If I have WordPress installed on a sub-domain, my endpoint URL will be</p>
+                    <p class="font-1 mb-2"><code>http://sub-domain.domain.com/wp-content/plugins/posts-api-wp/admin/api/get_posts.php</code></p>
+                    <p class="font-1 mb-2">Once you've set it up correctly, you may proceed and make your first <b>GET</b> request, by following the guidelines on the how to use page.</p>
+                </article>
+            </section>
+        </div>
+    </body>
+</html>
