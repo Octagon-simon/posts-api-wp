@@ -32,7 +32,7 @@
 	$(window).load(function () {
 		//Rename first child of posts-api-wp menu
 		document.querySelectorAll('.wp-first-item .wp-first-item').forEach(m => {
-			if(m.innerText == "WP Posts API"){
+			if(m.innerText == "Posts API WP"){
 				m.innerText = "Get Started";
 				return;
 			}

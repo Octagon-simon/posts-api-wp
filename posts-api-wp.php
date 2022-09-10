@@ -8,14 +8,14 @@
  * registers the activation and deactivation functions, and defines a function
  * that starts the plugin.
  *
- * @link               https://octagon-simon.github.io/projects/posts-api-wp/
+ * @link              https://octagon-simon.github.io/projects/posts-api-wp/
  * @since             1.0.0
  * @package           Posts_Api_Wp
  *
  * @wordpress-plugin
  * Plugin Name:       Posts API WP
  * Plugin URI:        https://octagon-simon.github.io/projects/posts-api-wp/
- * Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
+ * Description:       Posts API WP is a plugin that helps to make your WordPress posts available outside your WordPress site. This plugin acts as an API that can be used to share your WordPress posts to other websites.
  * Version:           1.0.0
  * Author:            Simon Ugorji
  * Author URI:        https://octagon-simon.github.io
@@ -80,7 +80,6 @@ function run_posts_api_wp() {
 
 }
 run_posts_api_wp();
-
 
 //add plugin links
 function pawp_plugin_links($links, $file) {

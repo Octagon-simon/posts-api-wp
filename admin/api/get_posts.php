@@ -21,7 +21,7 @@ header("Access-Control-Max-Age: 3600");
 
 header("Access-Control-Allow-Headers:  authorization, Authorization, Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
 
-header("HTTP/1.1 200 OK");
+//header("HTTP/1.1 200 OK");
 
 $a = array(
     "data" => apache_request_headers()

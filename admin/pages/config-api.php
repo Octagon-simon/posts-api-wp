@@ -190,7 +190,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['config-authHeader'])){
     ?>
         <section class="mt-3 posts-api-wp-section" style="border: 2px solid #9c27b0;">
             <form style="max-width: 500px;" method="post"
-                onsubmit="return confirm('If you save this key, any previous authorization key will be revoked making it invalid.\n\nAre you sure you have copied this authorization key and wish to use it?')">
+                onsubmit="return confirm('If you save this key, any previous authorization key will be revoked, making it invalid.\n\nAre you sure you have copied this authorization key and wish to use it?')">
                 <input type="hidden" name="config-authHeader" value="1">
                 <div class="mb-2">
                     <label class="label">Generate an authorization key</label>
