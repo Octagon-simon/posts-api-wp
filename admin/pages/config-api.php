@@ -225,12 +225,14 @@ if ($success) {
                     <select name="cat_in[]" class="w-100 posts-api-wp-input" multiple>
                         <option value="all">All categories</option>
                         <?php
-foreach (get_categories() as $cat) {
-?>
-                        <option value="<?php echo $cat->term_id; ?>"><?php echo $cat->cat_name; ?></option>
+                            foreach (get_categories() as $cat) {
+                        ?>
+                        <option value="<?php echo esc_html($cat->term_id); ?>">
+                            <?php echo esc_html($cat->cat_name); ?>
+                        </option>
                         <?php
-}
-?>
+                            }
+                        ?>
                     </select>
                     <small>Select the categories to include</small>
                 </div>
@@ -256,12 +258,14 @@ foreach (get_categories() as $cat) {
                     <label class="label">Select Meta data to include</label>
                     <select name="author_meta[]" class="w-100 posts-api-wp-input" multiple>
                         <?php
-foreach ($author_meta_fields as $field) {
-?>
-                            <option value="<?php echo $field; ?>"><?php echo $field; ?></option>
+                            foreach ($author_meta_fields as $field) {
+                        ?>
+                            <option value="<?php echo esc_html($field); ?>">
+                                <?php echo esc_html($field); ?>
+                            </option>
                         <?php
-}
-?>
+                            }
+                        ?>
                     </select>
                 </div>
                 <div class="mb-3 font-1">
