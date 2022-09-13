@@ -1,5 +1,9 @@
 <?php
 
+$p = explode('/', dirname(__FILE__));
+var_dump($p);
+exit();
+
 if ( ! defined( 'ABSPATH' ) ) 
     exit;
 //include the functions file

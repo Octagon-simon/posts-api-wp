@@ -1,12 +1,6 @@
 <?php
-
-$root = realpath(dirname(__FILE__));
-
-//load wordpress core functions
-require($root . '/../../../../../wp-load.php');
-
 //load functions file
-require('../core/functions.php');
+require(dirname(__FILE__).'/../core/functions.php');
 
 global $wpdb;
 

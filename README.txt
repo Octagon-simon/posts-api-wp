@@ -3,7 +3,7 @@ Contributors: @octagonsimon
 Donate link: https://www.paypal.com/donate/?hosted_button_id=ZYK9PQ8UFRTA4
 Tags: posts, api, endpoint, wp-posts
 Requires at least: 3.0.1
-Tested up to: 6.1
+Tested up to: 6.0.2
 Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html

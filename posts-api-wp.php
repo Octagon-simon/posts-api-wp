@@ -26,7 +26,7 @@
  */
 
 // If this file is called directly, abort.
-if ( ! defined( 'WPINC' ) ) {
+if (!defined('WPINC')) {
 	die;
 }
 
@@ -35,14 +35,15 @@ if ( ! defined( 'WPINC' ) ) {
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define( 'POSTS_API_WP_VERSION', '1.0.0' );
-define( 'POSTS_API_WP_PLUGIN_FILE', __FILE__ );
+define('POSTS_API_WP_VERSION', '1.0.0');
+define('POSTS_API_WP_PLUGIN_FILE', __FILE__);
 /**
  * The code that runs during plugin activation.
  * This action is documented in includes/class-posts-api-wp-activator.php
  */
-function activate_posts_api_wp() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-posts-api-wp-activator.php';
+function activate_posts_api_wp()
+{
+	require_once plugin_dir_path(__FILE__) . 'includes/class-posts-api-wp-activator.php';
 	Posts_Api_Wp_Activator::activate();
 }
 
@@ -50,19 +51,20 @@ function activate_posts_api_wp() {
  * The code that runs during plugin deactivation.
  * This action is documented in includes/class-posts-api-wp-deactivator.php
  */
-function deactivate_posts_api_wp() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-posts-api-wp-deactivator.php';
+function deactivate_posts_api_wp()
+{
+	require_once plugin_dir_path(__FILE__) . 'includes/class-posts-api-wp-deactivator.php';
 	Posts_Api_Wp_Deactivator::deactivate();
 }
 
-register_activation_hook( __FILE__, 'activate_posts_api_wp' );
-register_deactivation_hook( __FILE__, 'deactivate_posts_api_wp' );
+register_activation_hook(__FILE__, 'activate_posts_api_wp');
+register_deactivation_hook(__FILE__, 'deactivate_posts_api_wp');
 
 /**
  * The core plugin class that is used to define internationalization,
  * admin-specific hooks, and public-facing site hooks.
  */
-require plugin_dir_path( __FILE__ ) . 'includes/class-posts-api-wp.php';
+require plugin_dir_path(__FILE__) . 'includes/class-posts-api-wp.php';
 
 /**
  * Begins execution of the plugin.
@@ -73,7 +75,8 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-posts-api-wp.php';
  *
  * @since    1.0.0
  */
-function run_posts_api_wp() {
+function run_posts_api_wp()
+{
 
 	$plugin = new Posts_Api_Wp();
 	$plugin->run();
@@ -82,7 +85,8 @@ function run_posts_api_wp() {
 run_posts_api_wp();
 
 //add plugin links
-function pawp_plugin_links($links, $file) {
+function pawp_plugin_links($links, $file)
+{
 	$base = plugin_basename(POSTS_API_WP_PLUGIN_FILE);
 	if ($file == $base) {
 		$links[] = '<a href="https://twitter.com/ugorji_simon/" title="Follow me on Twitter"><i class="dashicons dashicons-twitter"></i></a>';
@@ -93,4 +97,65 @@ function pawp_plugin_links($links, $file) {
 	return $links;
 }
 
-add_filter( 'plugin_row_meta','pawp_plugin_links',10,2);
+add_filter('plugin_row_meta', 'pawp_plugin_links', 10, 2);
+
+//virtual pages
+class PAWTutorial
+{
+	function __construct()
+	{
+
+		register_activation_hook(__FILE__, array($this, 'activate'));
+
+		add_action('init', array($this, 'rewrite'));
+		add_filter('query_vars', array($this, 'query_vars'));
+		add_action('template_include', array($this, 'change_template'));
+
+	}
+
+	function activate()
+	{
+		set_transient('pawt_flush', 1, 60);
+	}
+
+	function rewrite()
+	{
+		//add_rewrite_endpoint( 'dump', EP_PERMALINK );
+		//add_rewrite_rule( '^the-page$', 'index.php?vptutorial=1', 'top' );
+		add_rewrite_rule('^posts-api-wp$', 'index.php?postsapiwp=1', 'top');
+
+		if (get_transient('pawt_flush')) {
+			delete_transient('pawt_flush');
+			flush_rewrite_rules();
+		}
+	}
+
+	function query_vars($vars)
+	{
+		$vars[] = 'postsapiwp';
+
+		return $vars;
+	}
+
+	function change_template($template)
+	{
+		if (get_query_var('postsapiwp', false) !== false) {
+
+			$newTemplate = locate_template(array('template-get-posts.php'));
+			if ('' != $newTemplate)
+				return $newTemplate;
+
+			//Check plugin directory next
+			$newTemplate = plugin_dir_path(__FILE__) . 'templates/template-get-posts.php';
+			if (file_exists($newTemplate))
+				return $newTemplate;
+		}
+
+		//Fall back to original template
+		return $template;
+
+	}
+
+}
+//instantiate class
+new PAWTutorial;
