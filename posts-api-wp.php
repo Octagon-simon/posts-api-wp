@@ -100,7 +100,7 @@ function pawp_plugin_links($links, $file)
 add_filter('plugin_row_meta', 'pawp_plugin_links', 10, 2);
 
 //virtual pages
-class PAWTutorial
+class PAWVirtualPage
 {
 	function __construct()
 	{
@@ -115,7 +115,7 @@ class PAWTutorial
 
 	function activate()
 	{
-		set_transient('pawt_flush', 1, 60);
+		set_transient('pawvp_flush', 1, 60);
 	}
 
 	function rewrite()
@@ -124,8 +124,8 @@ class PAWTutorial
 		//add_rewrite_rule( '^the-page$', 'index.php?vptutorial=1', 'top' );
 		add_rewrite_rule('^posts-api-wp$', 'index.php?postsapiwp=1', 'top');
 
-		if (get_transient('pawt_flush')) {
-			delete_transient('pawt_flush');
+		if (get_transient('pawvp_flush')) {
+			delete_transient('pawvp_flush');
 			flush_rewrite_rules();
 		}
 	}
@@ -158,4 +158,4 @@ class PAWTutorial
 
 }
 //instantiate class
-new PAWTutorial;
+new PAWVirtualPage;
