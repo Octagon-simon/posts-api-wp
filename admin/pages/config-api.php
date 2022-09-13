@@ -1,13 +1,7 @@
 <?php
 
-$p = explode('/', dirname(__FILE__));
-var_dump($p);
-exit();
-
-if ( ! defined( 'ABSPATH' ) ) 
+if (!defined('ABSPATH'))
     exit;
-//include the functions file
-require_once(dirname(__FILE__) . '/../core/functions.php');
 
 global $wpdb;
 
@@ -36,48 +30,49 @@ $args = array(
 $success = false;
 $success_msg = "";
 
-$author_meta_fields = ['admin_color', 'aim', 'comment_shortcuts', 'description', 'display_name','first_name', 'ID', 'jabber', 'last_name', 'nickname', 'plugins_last_view', 'plugins_per_page', 'rich_editing', 'syntax_highlighting', 'user_email', 'user_firstname', 'user_lastname', 'user_level', 'user_nicename', 'user_status', 'user_url', 'yim'];
+$author_meta_fields = ['admin_color', 'aim', 'comment_shortcuts', 'description', 'display_name', 'first_name', 'ID', 'jabber', 'last_name', 'nickname', 'plugins_last_view', 'plugins_per_page', 'rich_editing', 'syntax_highlighting', 'user_email', 'user_firstname', 'user_lastname', 'user_level', 'user_nicename', 'user_status', 'user_url', 'yim'];
 
-if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['config-api'])){
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['config-api'])) {
     //check if configuration was saved before
-    if( !empty(get_option('posts_api_wp_config')) ){
+    if (!empty(get_option('posts_api_wp_config'))) {
         //default configuration
         $config = json_decode(get_option('posts_api_wp_config'));
 
-        if(isset($_POST['numberPosts']) && !empty($_POST['numberPosts'])){
+        if (isset($_POST['numberPosts']) && !empty($_POST['numberPosts'])) {
             $config->numberPosts = intval($_POST['numberPosts']);
         }
-        if(isset($_POST['cat_in']) && !empty($_POST['cat_in']) && is_array($_POST['cat_in'])){
-            if( in_array('all', $_POST['cat_in']) ){
+        if (isset($_POST['cat_in']) && !empty($_POST['cat_in']) && is_array($_POST['cat_in'])) {
+            if (in_array('all', $_POST['cat_in'])) {
                 //reset stored categories
                 $config->category_in = [];
-                foreach(get_categories() as $cat){
+                foreach (get_categories() as $cat) {
                     //store all category ids
                     $config->category_in[] = intval($cat->term_id);
                 }
-            }else{
+            }
+            else {
                 //store category ids
-                $config->category_in = array_map(function($val){
+                $config->category_in = array_map(function ($val) {
                     return (intval($val));
                 }, $_POST['cat_in']);
             }
         }
-        if(isset($_POST['order']) && !empty($_POST['order'])){
+        if (isset($_POST['order']) && !empty($_POST['order'])) {
             $config->order = sanitize_text_field($_POST['order']);
         }
-        if(isset($_POST['featuredImg']) && !empty($_POST['featuredImg'])){
+        if (isset($_POST['featuredImg']) && !empty($_POST['featuredImg'])) {
             $config->featuredImg = true;
         }
-        if(isset($_POST['articleUrl']) && !empty($_POST['articleUrl'])){
+        if (isset($_POST['articleUrl']) && !empty($_POST['articleUrl'])) {
             $config->articleUrl = true;
         }
         //author meta
-        if(isset($_POST['authorMeta']) && !empty($_POST['authorMeta']) && is_array($_POST['author_meta'])){
+        if (isset($_POST['authorMeta']) && !empty($_POST['authorMeta']) && is_array($_POST['author_meta'])) {
             //check & store author meta fields
             $metaFields = [];
-            foreach($_POST['author_meta'] as $meta){
+            foreach ($_POST['author_meta'] as $meta) {
                 //check if meta field exists in the list of accepted fields
-                if( in_array($meta, $author_meta_fields)){
+                if (in_array($meta, $author_meta_fields)) {
                     //store meta
                     $metaFields[] = $meta;
                 }
@@ -85,16 +80,18 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['config-api'])){
             $config->author_meta = $metaFields;
         }
         //post date format
-        if(isset($_POST['postDate']) && !empty($_POST['postDate']) && isset($_POST['post_date_format']) && !empty($_POST['post_date_format'])){
+        if (isset($_POST['postDate']) && !empty($_POST['postDate']) && isset($_POST['post_date_format']) && !empty($_POST['post_date_format'])) {
             //check if user wants a custom date format
-            if($_POST['post_date_format'] == 'custom' && !empty($_POST['post_date_format_custom']) ){
+            if ($_POST['post_date_format'] == 'custom' && !empty($_POST['post_date_format_custom'])) {
                 //store date format
                 $config->post_date_format = sanitize_text_field($_POST['post_date_format_custom']);
-            }else{
+            }
+            else {
                 $config->post_date_format = sanitize_text_field($_POST['post_date_format']);
             }
         }
-    }else{
+    }
+    else {
         //default configuration
         $config = array(
             'numberPosts' => 20,
@@ -102,41 +99,42 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['config-api'])){
             'order' => 'ASC',
             'featuredImg' => false
         );
-    
-        if(isset($_POST['numberPosts']) && !empty($_POST['numberPosts'])){
+
+        if (isset($_POST['numberPosts']) && !empty($_POST['numberPosts'])) {
             $config['numberPosts'] = intval($_POST['numberPosts']);
         }
-        if(isset($_POST['cat_in']) && !empty($_POST['cat_in']) && is_array($_POST['cat_in'])){
-            if( in_array('all', $_POST['cat_in']) ){
+        if (isset($_POST['cat_in']) && !empty($_POST['cat_in']) && is_array($_POST['cat_in'])) {
+            if (in_array('all', $_POST['cat_in'])) {
                 //reset stored categories
                 $config['category_in'] = [];
-                foreach(get_categories() as $cat){
+                foreach (get_categories() as $cat) {
                     //store all category ids
                     $config['category_in'][] = intval($cat->term_id);
                 }
-            }else{
+            }
+            else {
                 //store category ids
-                $config['category_in'] = array_map(function($val){
+                $config['category_in'] = array_map(function ($val) {
                     return (intval($val));
                 }, $_POST['cat_in']);
             }
         }
-        if(isset($_POST['order']) && !empty($_POST['order'])){
+        if (isset($_POST['order']) && !empty($_POST['order'])) {
             $config['order'] = sanitize_text_field($_POST['order']);
         }
-        if(isset($_POST['featuredImg']) && !empty($_POST['featuredImg'])){
+        if (isset($_POST['featuredImg']) && !empty($_POST['featuredImg'])) {
             $config['featuredImg'] = true;
         }
-        if(isset($_POST['articleUrl']) && !empty($_POST['articleUrl'])){
+        if (isset($_POST['articleUrl']) && !empty($_POST['articleUrl'])) {
             $config['articleUrl'] = true;
         }
         //author meta
-        if(isset($_POST['authorMeta']) && !empty($_POST['authorMeta']) && is_array($_POST['author_meta'])){
+        if (isset($_POST['authorMeta']) && !empty($_POST['authorMeta']) && is_array($_POST['author_meta'])) {
             //check & store author meta fields
             $metaFields = [];
-            foreach($_POST['author_meta'] as $meta){
+            foreach ($_POST['author_meta'] as $meta) {
                 //check if meta field exists in the list of accepted fields
-                if( in_array($meta, $author_meta_fields)){
+                if (in_array($meta, $author_meta_fields)) {
                     //store meta
                     $metaFields[] = $meta;
                 }
@@ -144,12 +142,13 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['config-api'])){
             $config['author_meta'] = $metaFields;
         }
         //post date format
-        if(isset($_POST['postDate']) && !empty($_POST['postDate']) && isset($_POST['post_date_format']) && !empty($_POST['post_date_format'])){
+        if (isset($_POST['postDate']) && !empty($_POST['postDate']) && isset($_POST['post_date_format']) && !empty($_POST['post_date_format'])) {
             //check if user wants a custom date format
-            if($_POST['post_date_format'] == 'custom' && !empty($_POST['post_date_format_custom']) ){
+            if ($_POST['post_date_format'] == 'custom' && !empty($_POST['post_date_format_custom'])) {
                 //store date format
                 $config['post_date_format'] = sanitize_text_field($_POST['post_date_format_custom']);
-            }else{
+            }
+            else {
                 $config['post_date_format'] = sanitize_text_field($_POST['post_date_format']);
             }
         }
@@ -160,17 +159,18 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['config-api'])){
     $success_msg = "API Configuration has been updated successfully";
 }
 
-if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['config-authHeader'])){
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['config-authHeader'])) {
     $authKey = sanitize_text_field($_POST['authKey']);
     //check if api key is empty or not
-    if( !empty($authKey) ){
+    if (!empty($authKey)) {
         //check if configuration options exist
-        if( !empty(get_option('posts_api_wp_config'))){
+        if (!empty(get_option('posts_api_wp_config'))) {
             //retrieve all config options
             $config = json_decode(get_option('posts_api_wp_config'));
             //add authkey to it
             $config->authKey = md5($authKey);
-        }else{
+        }
+        else {
             //store authorization key
             $config['authKey'] = md5($authKey);
         }
@@ -178,7 +178,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['config-authHeader'])){
         update_option('posts_api_wp_config', json_encode($config));
 
         $success = true;
-        $success_msg = 'Authorization key <b>'.$authKey.'</b> has been saved successfully.';
+        $success_msg = 'Authorization key <b>' . $authKey . '</b> has been saved successfully.';
     }
 }
 ?>
@@ -187,11 +187,11 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['config-authHeader'])){
 <body>
     <div class="wrap" id="posts-api-wp">
         <?php
-        if($success){
-            echo '<div class="posts-api-wp-alert success mb-3 mt-3" style="max-width: 500px;">
-                <p class="m-0" style="font-size:1rem">'.$success_msg.'</p></div>';
-        }
-    ?>
+if ($success) {
+    echo '<div class="posts-api-wp-alert success mb-3 mt-3" style="max-width: 500px;">
+                <p class="m-0" style="font-size:1rem">' . $success_msg . '</p></div>';
+}
+?>
         <section class="mt-3 posts-api-wp-section" style="border: 2px solid #9c27b0;">
             <form style="max-width: 500px;" method="post"
                 onsubmit="return confirm('If you save this key, any previous authorization key will be revoked, making it invalid.\n\nAre you sure you have copied this authorization key and wish to use it?')">
@@ -225,12 +225,12 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['config-authHeader'])){
                     <select name="cat_in[]" class="w-100 posts-api-wp-input" multiple>
                         <option value="all">All categories</option>
                         <?php
-                        foreach(get_categories() as $cat){
-                    ?>
+foreach (get_categories() as $cat) {
+?>
                         <option value="<?php echo $cat->term_id; ?>"><?php echo $cat->cat_name; ?></option>
                         <?php
-                        }
-                    ?>
+}
+?>
                     </select>
                     <small>Select the categories to include</small>
                 </div>
@@ -256,12 +256,12 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['config-authHeader'])){
                     <label class="label">Select Meta data to include</label>
                     <select name="author_meta[]" class="w-100 posts-api-wp-input" multiple>
                         <?php
-                        foreach($author_meta_fields as $field){
-                        ?>
+foreach ($author_meta_fields as $field) {
+?>
                             <option value="<?php echo $field; ?>"><?php echo $field; ?></option>
                         <?php
-                        }
-                        ?>
+}
+?>
                     </select>
                 </div>
                 <div class="mb-3 font-1">
