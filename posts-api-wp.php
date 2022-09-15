@@ -15,7 +15,7 @@
  * @wordpress-plugin
  * Plugin Name:       Posts API WP
  * Plugin URI:        https://octagon-simon.github.io/projects/posts-api-wp/
- * Description:       Posts API WP is a plugin that helps to make your WordPress posts available outside your WordPress site. This plugin acts as an API that can be used to share your WordPress posts to other websites.
+ * Description:       Posts API WP is a plugin that helps to make your WordPress posts available outside your WordPress blog. This plugin creates a virtual API that can be used to share your wordpress posts to other websites.
  * Version:           1.0.0
  * Author:            Simon Ugorji
  * Author URI:        https://octagon-simon.github.io

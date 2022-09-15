@@ -8,11 +8,11 @@ Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-This plugin acts like a regular API that can be used to share your wordpress posts to other websites.
+This plugin creates a virtual API that can be used to share your wordpress posts to other websites.
 
 == Description ==
 
-**Posts API WP** is a plugin that helps to make your WordPress posts available outside your WordPress site. This plugin acts like a regular **API** that can be used to share your wordpress posts to other websites.
+**Posts API WP** is a plugin that helps to make your WordPress posts available outside your WordPress site. This plugin acts creates a virtual **API** that can be used to share your wordpress posts to other websites.
 
 > All API endpoints are secured with an authorization key and this means that you have full control over how your WordPress posts are shared.
 
@@ -40,6 +40,7 @@ Head over to the **HOW TO USE** page on the plugin to learn how you can set up y
 2. This is the Screenshot of how to use page.
 3. This is the Screenshot of get started page.
 4. This is a Screenshot of the plugin in action on a static site.
+5. This is a Screenshot of an API response from my EndPoint.
 
 == Changelog ==
 

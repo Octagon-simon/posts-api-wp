@@ -104,6 +104,20 @@
 				$('#section_post_date_format').hide()
 			}
 		})
+		
+		//handle additional fields
+		$('.chk-all-add-fields').on('change', function(){
+			//if the checkbox is checked
+			if(this.checked){
+				document.querySelectorAll('.chk-add-fields').forEach(box => {
+					box.checked = true;
+				})
+			}else{
+				document.querySelectorAll('.chk-add-fields').forEach(box => {
+					box.checked = false;
+				})
+			}
+		})
 	})
 
 })(jQuery);

@@ -42,9 +42,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     //var_dump($_SERVER);
     //in javascript, headers are sent lowercased using the new Headers constructor with fetch
     //check if api key was provided
-    if (array_key_exists('Authorization', apache_request_headers())) {
-        $authHeader = apache_request_headers();
-        $authHeader = $authHeader['Authorization'];
+    if (array_key_exists('HTTP_X_API_KEY', $_SERVER)) {
+        $authHeader = $_SERVER['HTTP_X_API_KEY'];
     }
     else {
         returnData(400, false, "You must provide an Authorization header");
@@ -58,6 +57,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     //build query arguments
     $args = [];
     $args_not_included = ["authKey", "featuredImg", "articleUrl"];
+    //11 total allowed fields and 17 total additional fields making all fields 28
+    $allowed_fields = ["post_date","post_date_gmt","post_content","post_title","post_modified","post_modified_gmt","featuredImg","articleUrl","post_author_display_name","post_author_first_name","post_author_last_name"];
+
+    //fields to dump
+    $fields_to_dump = array_merge($config->additional_fields, $allowed_fields);
+
     foreach ($config as $key => $value) {
         //check if key should be included
         if ( !in_array($key, $args_not_included) ) {
@@ -74,6 +79,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $retval[$key] = $obj;
 
             foreach ($obj as $innerKey => $innerVal) {
+                //remove unnecessary fields from response object
+                if(!in_array($innerKey, $fields_to_dump)){
+                    unset($retval[$key]->$innerKey);
+                }
                 //inner key is like ID, post_author etc
                 //if user wants url to the featured Image
                 if ($config->featuredImg && $innerKey == 'ID') {
@@ -87,6 +96,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 if ($config->post_date_format && $innerKey == 'post_date') {
                     $retval[$key]->$innerKey = gmdate($config->post_date_format, strtotime($innerVal));
                 }
+                //if user wants to format the post date
+                if ($config->post_date_format && $innerKey == 'post_modified') {
+                    $retval[$key]->$innerKey = gmdate($config->post_date_format, strtotime($innerVal));
+                }
                 //if user wants to retrieve author meta
                 if ($config->author_meta && $innerKey == 'post_author') {
                     //loop through the author meta fields that the user wants to see
@@ -96,6 +109,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                             $authorKey = $innerKey.'_'.$metaField;
                             //add to the return data
                             $retval[$key]->$authorKey = getAuthorMeta($metaField, intval($innerVal));
+                            //remove the post author's id from array
+                            if(isset($retval[$key]->post_author)) {
+                                unset($retval[$key]->post_author);
+                            }
                         }
                     }
                 }

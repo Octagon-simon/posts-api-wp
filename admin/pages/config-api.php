@@ -21,6 +21,7 @@ $args = array(
     'category__in' => [],
     'category__not__in' => []
 );
+
 */
 //var_dump(get_posts(['numberPosts' => 20]));
 //get_categories() lists out the categories that has a post assigned to them
@@ -31,6 +32,8 @@ $success = false;
 $success_msg = "";
 
 $author_meta_fields = ['admin_color', 'aim', 'comment_shortcuts', 'description', 'display_name', 'first_name', 'ID', 'jabber', 'last_name', 'nickname', 'plugins_last_view', 'plugins_per_page', 'rich_editing', 'syntax_highlighting', 'user_email', 'user_firstname', 'user_lastname', 'user_level', 'user_nicename', 'user_status', 'user_url', 'yim'];
+
+$additionalFields = ["ID","post_excerpt","post_status","comment_status","ping_status","post_password","post_name","to_ping","pinged","post_content_filtered","post_parent","guid","menu_order","post_type","post_mime_type","comment_count","filter"];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['config-api'])) {
     //check if configuration was saved before
@@ -88,6 +91,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['config-api'])) {
             }
             else {
                 $config->post_date_format = sanitize_text_field($_POST['post_date_format']);
+            }
+        }
+        //additional fields
+        //reset array
+        $config->additional_fields = [];
+        foreach($additionalFields as $field){
+            //check if user needs it
+            if (isset($_POST[$field]) && !empty($_POST[$field])) {
+                //store the field
+                $config->additional_fields[] = $field;
             }
         }
     }
@@ -152,6 +165,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['config-api'])) {
                 $config['post_date_format'] = sanitize_text_field($_POST['post_date_format']);
             }
         }
+        //additional fields
+        //reset array
+        $config['additional_fields'] = [];
+        foreach($additionalFields as $field){
+            //check if user needs it
+            if (isset($_POST[$field]) && !empty($_POST[$field])) {
+                //store the field
+                $config['additional_fields'][] = $field;
+            }
+        }
     }
     //update configuration
     update_option('posts_api_wp_config', json_encode($config));
@@ -184,6 +207,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['config-authHeader']))
 ?>
 <!DOCTYPE html>
 <html>
+
 <body>
     <div class="wrap" id="posts-api-wp">
         <?php
@@ -252,7 +276,8 @@ if ($success) {
                     Post
                 </div>
                 <div class="mb-3 font-1">
-                    <input id="chk_author_meta" name="authorMeta" type="checkbox" class="posts-api-wp-input" value="1">&nbsp;Include Author Meta
+                    <input id="chk_author_meta" name="authorMeta" type="checkbox" class="posts-api-wp-input"
+                        value="1">&nbsp;Include Author Meta
                 </div>
                 <div class="mb-2" id="select_author_meta" style="display:none;">
                     <label class="label">Select Meta data to include</label>
@@ -260,20 +285,22 @@ if ($success) {
                         <?php
                             foreach ($author_meta_fields as $field) {
                         ?>
-                            <option value="<?php echo esc_html($field); ?>">
-                                <?php echo esc_html($field); ?>
-                            </option>
+                        <option value="<?php echo esc_html($field); ?>">
+                            <?php echo esc_html($field); ?>
+                        </option>
                         <?php
                             }
                         ?>
                     </select>
                 </div>
                 <div class="mb-3 font-1">
-                    <input id="chk_format_post_date" name="postDate" type="checkbox" class="posts-api-wp-input" value="1">&nbsp;Format Post Date
+                    <input id="chk_format_post_date" name="postDate" type="checkbox" class="posts-api-wp-input"
+                        value="1">&nbsp;Format Post Date
                 </div>
                 <div class="mb-2" id="section_post_date_format" style="display:none;">
                     <label class="label">Select Date Format</label>
-                    <select id="select_post_date_format" name="post_date_format" class="w-100 posts-api-wp-input font-1">
+                    <select id="select_post_date_format" name="post_date_format"
+                        class="w-100 posts-api-wp-input font-1">
                         <option value="">Select One</option>
                         <option value="custom">Custom Date Format</option>
                         <option value="m-d-y">09-18-01</option>
@@ -293,8 +320,69 @@ if ($success) {
                         <b>Y</b> stands for the full year ie <b>2001</b> <br>
                     </p>
                     <label class="label">Enter a Custom Format</label>
-                    <input name="post_date_format_custom" type="text" class="w-100 posts-api-wp-input" value="D d, Y" placeholder="Enter the date format to use">
+                    <input name="post_date_format_custom" type="text" class="w-100 posts-api-wp-input" value="D d, Y"
+                        placeholder="Enter the date format to use">
                 </div>
+                <section>
+                    <p class="font-1 fw-bold mb-2">Additional Fields</p>
+
+                    <div >
+                        <div class="mb-3 font-1">
+                            <input class="chk-add-fields" name="filter" type="checkbox" class="posts-api-wp-input" value="1">&nbsp;Include Filter
+                        </div>
+                        <div class="mb-3 font-1">
+                            <input class="chk-add-fields" name="ID" type="checkbox" class="posts-api-wp-input" value="1">&nbsp;Include Post ID
+                        </div>
+                        <div class="mb-3 font-1">
+                            <input class="chk-add-fields" name="post_excerpt" type="checkbox" class="posts-api-wp-input" value="1">&nbsp;Include Post Excerpt
+                        </div>
+                        <div class="mb-3 font-1">
+                            <input class="chk-add-fields" name="post_status" type="checkbox" class="posts-api-wp-input" value="1">&nbsp;Include Post Status
+                        </div>
+                        <div class="mb-3 font-1">
+                            <input class="chk-add-fields" name="comment_status" type="checkbox" class="posts-api-wp-input" value="1">&nbsp;Include Comment Status
+                        </div>
+                        <div class="mb-3 font-1">
+                            <input class="chk-add-fields" name="comment_count" type="checkbox" class="posts-api-wp-input" value="1">&nbsp;Include Comment Count
+                        </div>
+                        <div class="mb-3 font-1">
+                            <input class="chk-add-fields" name="ping_status" type="checkbox" class="posts-api-wp-input" value="1">&nbsp;Include Ping Status
+                        </div>
+                        <div class="mb-3 font-1">
+                            <input class="chk-add-fields" name="post_password" type="checkbox" class="posts-api-wp-input" value="1">&nbsp;Include Post Password
+                        </div>
+                        <div class="mb-3 font-1">
+                            <input class="chk-add-fields" name="post_type" type="checkbox" class="posts-api-wp-input" value="1">&nbsp;Include Post Type
+                        </div>
+                        <div class="mb-3 font-1">
+                            <input class="chk-add-fields" name="post_mime_type" type="checkbox" class="posts-api-wp-input" value="1">&nbsp;Include Post MIME type
+                        </div>
+                        <div class="mb-3 font-1">
+                            <input class="chk-add-fields" name="post_content_filtered" type="checkbox" class="posts-api-wp-input" value="1">&nbsp;Include Post Content Filtered
+                        </div>
+                        <div class="mb-3 font-1">
+                            <input class="chk-add-fields" name="post_parent" type="checkbox" class="posts-api-wp-input" value="1">&nbsp;Include Post Parent
+                        </div>
+                        <div class="mb-3 font-1">
+                            <input class="chk-add-fields" name="post_name" type="checkbox" class="posts-api-wp-input" value="1">&nbsp;Include Post Name
+                        </div>
+                        <div class="mb-3 font-1">
+                            <input class="chk-add-fields" name="guid" type="checkbox" class="posts-api-wp-input" value="1">&nbsp;Include GUID
+                        </div>
+                        <div class="mb-3 font-1">
+                            <input class="chk-add-fields" name="menu_order" type="checkbox" class="posts-api-wp-input" value="1">&nbsp;Include Menu Order
+                        </div>
+                        <div class="mb-3 font-1">
+                            <input class="chk-add-fields" name="to_ping" type="checkbox" class="posts-api-wp-input" value="1">&nbsp;Include To Ping
+                        </div>
+                        <div class="mb-3 font-1">
+                            <input class="chk-add-fields" name="pinged" type="checkbox" class="posts-api-wp-input" value="1">&nbsp;Include Pinged
+                        </div>
+                    </div>
+                    <div class="mb-3 font-1" style="border-top: 1px solid #ddd;padding-top: 10px;">
+                        <input class="chk-all-add-fields" type="checkbox" class="posts-api-wp-input">&nbsp;Check All Additional Fields
+                    </div>
+                </section>
                 <div class="mb-2">
                     <button class="posts-api-wp-btn" type="submit">Save configuration</button>
                 </div>
@@ -302,4 +390,5 @@ if ($success) {
         </section>
     </div>
 </body>
+
 </html>

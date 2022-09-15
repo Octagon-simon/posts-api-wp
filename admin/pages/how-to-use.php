@@ -35,7 +35,7 @@ RewriteEngine On<br>
 RewriteCond %{REQUEST_METHOD} GET<br>
 RewriteCond %{REQUEST_FILENAME} !-f<br>
 ##Syntax<br>
-##RewriteRule CUSTOM_ROUTE$ ENDPOINT_URL [NC,L]<br>
+##RewriteRule CUSTOM_ROUTE$ BLOG_FOLDER/ENDPOINT_URL/ [NC,L]<br>
 ##For Example<br>
 RewriteRule api/get-wordpress-posts$ blog/posts-api-wp/ [NC,L]</pre>
             </article>
@@ -44,10 +44,10 @@ RewriteRule api/get-wordpress-posts$ blog/posts-api-wp/ [NC,L]</pre>
             <article>
                 <h2 class="mb-2 fw-bold">Request Method & Authorization Header</h2>
                 <p class="font-1 mb-2">Before you can retrieve data with the API, you must send a <b>GET</b> request to the endpoint and include your API Key in the authorization header.</p>
-                <p class="mb-2 font-1"><code>Authorization: YOUR_API_KEY</code></p>
+                <p class="mb-2 font-1"><code>X-API-Key: YOUR_API_KEY</code></p>
                 <p class="mb-2 font-1">For example</p>
-                <p class="mb-2 font-1"><code class="mb-2">Authorization: XAXXXXBCDXXXXEFXXXXGXXXHIJXXXXXX</code></p>
-                <p class="font-1">Before you include your API key in the Authorization Header, make sure it is the recent one which you just generated on the configuration page.</p>
+                <p class="mb-2 font-1"><code class="mb-2">X-API-Key: XAXXXXBCDXXXXEFXXXXGXXXHIJXXXXXX</code></p>
+                <p class="font-1">Before you include your API key in the Authorization Header, make sure it is the recent one which you generated on the configuration page.</p>
             </article>
         </section>
         <section class="mt-3 posts-api-wp-section">
