@@ -2,8 +2,6 @@
 //load functions file
 require(dirname(__FILE__).'/../core/functions.php');
 
-global $wpdb;
-
 if (isset($_SERVER['HTTP_ORIGIN'])) {
     $http_origin = esc_url_raw($_SERVER['HTTP_ORIGIN']);
     header("Access-Control-Allow-Origin: $http_origin");
@@ -16,7 +14,6 @@ header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers:  authorization, Authorization, Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
 
 //header("HTTP/1.1 200 OK");
-
 function returnData($http_code, $success = false, $data)
 {
     $retval = array(
