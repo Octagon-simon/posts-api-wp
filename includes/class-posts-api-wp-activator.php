@@ -3,7 +3,7 @@
 /**
  * Fired during plugin activation
  *
- * @link       https://octagon-simon.github.io
+ * @link       https://octagon-simon.github.io/projects/posts-api-wp/
  * @since      1.0.0
  *
  * @package    Posts_Api_Wp

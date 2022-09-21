@@ -6,7 +6,7 @@
  * A class definition that includes attributes and functions used across both the
  * public-facing side of the site and the admin area.
  *
- * @link       https://octagon-simon.github.io
+ * @link       https://octagon-simon.github.io/projects/posts-api-wp/
  * @since      1.0.0
  *
  * @package    Posts_Api_Wp

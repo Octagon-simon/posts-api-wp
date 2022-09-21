@@ -16,9 +16,9 @@
  * Plugin Name:       Posts API WP
  * Plugin URI:        https://octagon-simon.github.io/projects/posts-api-wp/
  * Description:       Posts API WP is a plugin that helps to make your WordPress posts available outside your WordPress blog. This plugin creates a virtual API that can be used to share your wordpress posts to other websites.
- * Version:           1.0.0
+ * Version:           1.0.2
  * Author:            Simon Ugorji
- * Author URI:        https://octagon-simon.github.io
+ * Author URI:        https://octagon-simon.github.io/projects/posts-api-wp/
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:       posts-api-wp
@@ -35,7 +35,7 @@ if (!defined('WPINC')) {
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define('POSTS_API_WP_VERSION', '1.0.0');
+define('POSTS_API_WP_VERSION', '1.0.2');
 define('POSTS_API_WP_PLUGIN_FILE', __FILE__);
 /**
  * The code that runs during plugin activation.
@@ -90,7 +90,7 @@ function pawp_plugin_links($links, $file)
 	$base = plugin_basename(POSTS_API_WP_PLUGIN_FILE);
 	if ($file == $base) {
 		$links[] = '<a href="https://twitter.com/ugorji_simon/" title="Follow me on Twitter"><i class="dashicons dashicons-twitter"></i></a>';
-		$links[] = '<a href="https://fb.com/simonUgorji" title="Follow me on Facebook"><i class="dashicons dashicons-facebook"></i></a>';
+		$links[] = '<a href="https://fb.com/simon.ugorji.106" title="Follow me on Facebook"><i class="dashicons dashicons-facebook"></i></a>';
 		$links[] = '<a href="https://www.linkedin.com/in/simon-ugorji-57a6a41a3/" title="Connect With Me on linkedin"><i class="dashicons dashicons-linkedin"></i></a>';
 		$links[] = '<a href="https://www.paypal.com/donate/?hosted_button_id=ZYK9PQ8UFRTA4" title="Donate"><i class="dashicons dashicons-coffee"></i></a>';
 	}

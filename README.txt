@@ -4,16 +4,16 @@ Donate link: https://www.paypal.com/donate/?hosted_button_id=ZYK9PQ8UFRTA4
 Tags: posts, api, endpoint, wp-posts
 Requires at least: 3.0.1
 Tested up to: 6.0.2
-Stable tag: 1.0.0
+Stable tag: 1.0.2
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-This plugin creates a virtual API that can be used to share your wordpress posts to other websites.
+This plugin creates a virtual API that can be used to share your wordpress posts to other websites through a virtual API.
 
 == Description ==
 
-**Posts API WP** is a plugin that helps to make your WordPress posts available outside your WordPress site. This plugin acts creates a virtual **API** that can be used to share your wordpress posts to other websites.
+**Posts API WP** is a plugin that helps to make your WordPress posts available outside your WordPress site. This plugin creates a virtual **API** that can be used to share your wordpress posts to other websites.
 
 > All API endpoints are secured with an authorization key and this means that you have full control over how your WordPress posts are shared.
 
@@ -51,11 +51,23 @@ Head over to the **HOW TO USE** page on the plugin to learn how you can set up y
 
 == Changelog ==
 
+= 1.0.2 =
+
+* Authorization header was changed
+* Plugin documentation was updated
+* Plugin was optimized
+
 = 1.0.0 =
 
 * First official release
 
 == Upgrade Notice ==
+
+= 1.0.2 =
+
+* Authorization header was changed
+* Plugin documentation was updated
+* Plugin was optimized
 
 = 1.0.0 =
 

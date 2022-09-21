@@ -25,20 +25,7 @@ global $wpdb;
                         onclick="const endPoint = document.querySelector('#inp_endPoint').value.trim();(endPoint !== '') ? (window.navigator.clipboard.writeText(endPoint), alert('Endpoint has been copied')) : ''">Copy</button>
                 </section>
             </div>
-            <article>
-                <p class="posts-api-wp-alert info font-1 mb-3">Make sure to modify the <b>Endpoint URL</b> to reflect your WordPress Blog.</p>
-                <h2 class="fw-bold mb-2">A LITTLE TIP</h2>
-                <p class="mb-1 font-1">If you have access to the <b>.htaccess</b> file, you can set up a custom route to
-                    this Endpoint.</p>
-                <pre>##CUSTOM ROUTE TO ENDPOINT<br>
-RewriteEngine On<br>
-RewriteCond %{REQUEST_METHOD} GET<br>
-RewriteCond %{REQUEST_FILENAME} !-f<br>
-##Syntax<br>
-##RewriteRule CUSTOM_ROUTE$ BLOG_FOLDER/ENDPOINT_URL/ [NC,L]<br>
-##For Example<br>
-RewriteRule api/get-wordpress-posts$ blog/posts-api-wp/ [NC,L]</pre>
-            </article>
+            <p class="posts-api-wp-alert info font-1 mb-3">Make sure to modify the <b>Endpoint URL</b> to reflect your WordPress Blog.</p>
         </section>
         <section class="mt-3 posts-api-wp-section">
             <article>
@@ -70,8 +57,8 @@ RewriteRule api/get-wordpress-posts$ blog/posts-api-wp/ [NC,L]</pre>
         <section class="text-center posts-api-wp-section">
             <article>
                 <img src="<?php print(plugins_url( '/../img/', __FILE__).'exclamation-triangle.png'); ?>" width="150px">
-            <h1 class="fw-bold mt-2 mb-2">API CONFIGURATION NOT SET</h1>
-            <p class="font-1">You must configure your API before you can access the contents of this page.</p>
+            <h1 class="fw-bold mt-2 mb-2">API PARAMETERS NOT CONFIGURED</h1>
+            <p class="font-1">You must configure the API parameters before you can access the contents of this page.</p>
 
             </article>
         </section>

@@ -3,7 +3,7 @@
 /**
  * Register all actions and filters for the plugin
  *
- * @link       https://octagon-simon.github.io
+ * @link       https://octagon-simon.github.io/projects/posts-api-wp/
  * @since      1.0.0
  *
  * @package    Posts_Api_Wp

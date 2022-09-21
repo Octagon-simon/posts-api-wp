@@ -6,7 +6,7 @@
  * Loads and defines the internationalization files for this plugin
  * so that it is ready for translation.
  *
- * @link       https://octagon-simon.github.io
+ * @link       https://octagon-simon.github.io/projects/posts-api-wp/
  * @since      1.0.0
  *
  * @package    Posts_Api_Wp

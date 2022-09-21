@@ -3,7 +3,7 @@
 /**
  * The admin-specific functionality of the plugin.
  *
- * @link       https://octagon-simon.github.io
+ * @link       https://octagon-simon.github.io/projects/posts-api-wp/
  * @since      1.0.0
  *
  * @package    Posts_Api_Wp
@@ -118,19 +118,19 @@ class Posts_Api_Wp_Admin {
 	public function GetStartedPage()
 	{
 		require(dirname(__FILE__) . '/pages/get-started.html');
-		require(dirname(__FILE__) . '/pages/footer.php');
+		require(dirname(__FILE__) . '/pages/footer.html');
 	}
 	//build api page
 	public function ConfigApiPage()
 	{
 		require(dirname(__FILE__) . '/pages/config-api.php');
-		require(dirname(__FILE__) . '/pages/footer.php');
+		require(dirname(__FILE__) . '/pages/footer.html');
 	}
 
 	public function HowToUsePage()
 	{
 		require(dirname(__FILE__) . '/pages/how-to-use.php');
-		require(dirname(__FILE__) . '/pages/footer.php');
+		require(dirname(__FILE__) . '/pages/footer.html');
 	}
 
 }

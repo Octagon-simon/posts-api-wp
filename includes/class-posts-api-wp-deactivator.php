@@ -3,7 +3,7 @@
 /**
  * Fired during plugin deactivation
  *
- * @link       https://octagon-simon.github.io
+ * @link       https://octagon-simon.github.io/projects/posts-api-wp/
  * @since      1.0.0
  *
  * @package    Posts_Api_Wp
@@ -31,7 +31,7 @@ class Posts_Api_Wp_Deactivator {
 	 */
 	public static function deactivate() {
 		//revoke api key but retain configuration options
-		$configOpts = json_decode(get_option('posts_api_wp_config'));
+		$configOpts = (get_option('posts_api_wp_config')) ? json_decode(get_option('posts_api_wp_config')) : null;
 		if ($configOpts) {
 			//revoke auth key
 			unset($configOpts->authKey);

@@ -11,7 +11,7 @@ header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Methods: GET, OPTIONS");
 header("Access-Control-Max-Age: 3600");
 
-header("Access-Control-Allow-Headers:  authorization, Authorization, Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
+header("Access-Control-Allow-Headers: x-api-key, X-API-Key, Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
 
 //header("HTTP/1.1 200 OK");
 function returnData($http_code, $success = false, $data)
@@ -36,8 +36,6 @@ else {
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-    //var_dump($_SERVER);
-    //in javascript, headers are sent lowercased using the new Headers constructor with fetch
     //check if api key was provided
     if (array_key_exists('HTTP_X_API_KEY', $_SERVER)) {
         $authHeader = $_SERVER['HTTP_X_API_KEY'];
